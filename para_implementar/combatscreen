@@ -1,0 +1,221 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(QuizGame());
+}
+
+class QuizGame extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Color(0xFF00092C),
+        body: QuizScreen(),
+      ),
+    );
+  }
+}
+
+class QuizScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double containerWidth = screenWidth * 0.5; // Metade da tela para o quiz e ícones
+    double iconSize = 36; // Tamanho dos ícones
+
+    return Row(
+      children: [
+        // Lado esquerdo: Ícones e conteúdo do quiz
+        Container(
+          width: containerWidth,
+          padding: EdgeInsets.all(16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Coluna para os ícones
+              Column(
+                children: [
+                  IconButton(
+                    iconSize: iconSize,
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirmação"),
+                            content: Text("Você realmente quer sair do questionário?"),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancelar"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Sair"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  // Ação para sair do questionário
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(height: 8),
+                  IconButton(
+                    iconSize: iconSize,
+                    icon: Icon(Icons.help, color: Colors.white),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Dica"),
+                            content: Text("é só escolher a certa."),
+                            actions: [
+                              TextButton(
+                                child: Text("Fechar"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(width: 8), // Espaço entre os ícones e a caixa de pergunta/opções
+              // Caixa de pergunta e opções
+              Expanded(
+                child: Container(
+                  width: containerWidth * 0.9,
+                  margin: EdgeInsets.only(top: 24), // Espaçamento entre a caixa de pergunta e o topo
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    children: [
+                      // Pergunta
+                      Container(
+                        width: double.infinity,
+                        height: 80,
+                        margin: EdgeInsets.all(8), // Adiciona margem ao redor da caixa de pergunta
+                        decoration: BoxDecoration(
+                          color: Color(0xFF2894FF),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.white),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                "Os primeiros invasores a chegar ao Brasil foram os portugueses, liderados por...",
+                                style: TextStyle(color: Colors.white, fontSize: 14),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16), // Espaçamento entre a pergunta e as opções
+                      // Opções
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Espaçamento uniforme entre as opções
+                          children: [
+                            optionButton("Cristóvão Colombo", containerWidth),
+                            optionButton("Pedro Álvares Cabral", containerWidth),
+                            optionButton("Dom Pedro II", containerWidth),
+                            optionButton("Ingleses", containerWidth),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Lado direito: Imagem e sobreposições
+        Expanded(
+          child: Stack(
+            children: [
+              // Imagem de fundo com tamanho controlado
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: 400, // Ajuste o tamanho conforme necessário
+                  height: 410,
+                  child: Image.asset(
+                    'assets/ambient/fundoBatalha 1.png',
+                    fit: BoxFit.cover, //
+                  ),
+                ),
+              ),
+              // Imagem no canto superior direito
+              Positioned(
+                top: 5, // Centraliza um pouco mais verticalmente
+                right: 90, // Centraliza um pouco mais horizontalmente
+                child: Image.asset(
+                  'assets/persons/inimigoAtaque 1.png', // Substitua pelo caminho da sua imagem
+                  width: 160, // Ajuste o tamanho conforme necessário
+                  height: 200,
+                ),
+              ),
+              // Imagem no canto inferior esquerdo
+              Positioned(
+                bottom: 10, // Centraliza um pouco mais verticalmente
+                left: 32, // Centraliza um pouco mais horizontalmente
+                child: Image.asset(
+                  'assets/persons/girlAtirarma 1.png', //
+                  width: 270, // Ajuste o tamanho conforme necessário
+                  height: 130,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget optionButton(String text, double containerWidth) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Container(
+        width: containerWidth * 0.75, // Ajusta a largura dos botões
+        height: 50, // Altura fixa para o botão
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFFFF7700),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: EdgeInsets.all(0),
+          ),
+          onPressed: () {
+            // Ação ao pressionar a opção
+          },
+          child: SingleChildScrollView(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

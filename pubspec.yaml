@@ -1,0 +1,64 @@
+name: huliman_mobile
+description: "Sistema gamificado para estudos do ENEM"
+publish_to: 'none' # Remova esta linha se desejar publicar no pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+flutter_native_splash:
+  color: "#00092C"
+  image: "assets/app/splash_icon.png"
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: "assets/app/app_icon.png"
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  adaptive_icon_background: "#00092C"
+  adaptive_icon_foreground: "assets/app/splash_icon.png"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  url_launcher: ^6.0.0
+  flutter_shake_animated: ^0.0.5
+  flutter_svg: ^2.0.3 # Adicionando o suporte a SVG
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.0.0
+  flutter_native_splash: ^2.4.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/background/huliman_background.png
+    - assets/icons/rocket.png
+    - assets/crewmates/halleySelect.png
+    - assets/crewmates/boppSelect.png
+    - assets/galaxys/GalaxiaHumanas.png
+    - assets/planets/PlanetaFilosofia 1.png
+    - assets/planets/PlanetaGeografia 1.png
+    - assets/planets/PlanetaHistoria 1.png
+    - assets/planets/PlanetaSociologia 1.png
+    - assets/background/mapaNew 1.png
+    - assets/background/fundoBatalha 1.png
+    - assets/persons/battle/girlAtirarma 1.png
+    - assets/persons/battle/inimigoAtaque 1.png
+    - assets/pop_up/iconInimigo.png
+    - assets/pop_up/boyPopUp 1.png
+    - assets/pop_up/inimigoAtaque 2.png
+    - assets/pop_up/pFeVitoria 2.png
+    - assets/planets/PlanetaHistoria.png
+    - assets/pop_up/girlPopUp 1.png
+
